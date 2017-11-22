@@ -1,14 +1,14 @@
 from flask import Flask
 from flask_cors import CORS
-from peewee import MySQLDatabase
+from peewee import PostgresqlDatabase
 
 import config
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-db = MySQLDatabase(
-    database=config.DB_NAME, 
-    user=config.DB_USERNAME, passwd=config.DB_PASSWORD)
+db = PostgresqlDatabase(
+    database=config.DB_NAME,
+    user=config.DB_USERNAME, password=config.DB_PASSWORD, host=config.DB_LOCATION, port=config.DB_PORT)
 # host=config.DB_LOCATION, port=config.DB_PORT,
 
 
