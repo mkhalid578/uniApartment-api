@@ -9,13 +9,14 @@ from app.models.user import User
 # db table
 class Property(Model):
     Available = BooleanField()
-    Rent = IntegerField()
+    Rent = FloatField()
     Beds = IntegerField()
     Baths = IntegerField()
     Pets = BooleanField()
     Features = TextField()
-    ContactInfo = TextField()
     Address = TextField()
+    Interested = TextField(default = "")
+    imageUrl = TextField()
     # this should also be contact information but for simplicity we will have non of that 
 
     # owner = ForeignKeyField(User, to_field = id, related_name='property')

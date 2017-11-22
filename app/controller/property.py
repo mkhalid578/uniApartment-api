@@ -10,27 +10,34 @@ from app import app
 property = Blueprint('property', __name__)
 
 @property.route('/property', methods=['POST'])
-def create_property():
+def get_or_create_property():
     '''
         gets a post request with a json property object
         creates a db instance of json property 
         returns id of db instance
     '''
-    new_property = Property()
-    # uncomment for debugging
-    # print(request.get_json())
     content = request.get_json()
-    new_property.Available = content.get("Available")
-    new_property.Rent = content.get("Rent")
-    new_property.Beds = content.get("Beds")
-    new_property.Baths = content.get("Baths")
-    new_property.Pets = content.get("Pets")
-    new_property.Features = content.get("Features")
-    new_property.ContactInfo = content.get("ContactInfo")
-    new_property.Address = content.get("Address")
 
+
+    new_property = Property().get_or_create(
+    Available = content.get("Available"),
+    Rent = content.get("Rent"),
+    Beds = content.get("Beds"),
+    Baths = content.get("Baths"),
+    Pets = content.get("Pets"),
+    Features = content.get("Features"),
+    Address = content.get("Address"),
+    imageUrl = content.get("ImageUrl")
+        )[0]
+    if new_property.Interested is not None and str(content.get("id")) not in str(new_property.Interested):
+        interested  ="{} {} {}".format(new_property.Interested , ' ' , str(content.get("id")))
+        print(interested)
+        new_property.Interested = interested
+        new_property.save()
+    print(new_property)
     try:
-        new_property.save(force_insert = True)
+        pass
+        # new_property.save(force_insert = True)
     except IntegrityError:
         return Response(status=409)
 
@@ -66,33 +73,53 @@ def get_specific_property(key, value):
         # we need a status that says the query is bad because of the key
         return Response(status = 404)
 
-@property.route('/property/<key>=<value>', methods = ['PUT'])
-def update_property(key, value):
+@property.route('/property/<id>', methods = ['PUT'])
+def update_property( id):
     # key will be a unique value eventually
     # so only value will be passed
 
     content = request.get_json()
-    print(content)
-    updateKey = None
-    if key in Property.__dict__.keys():
-        updating_property = Property.get(Property.__dict__[key].field == int(value))
-        
-        if len(list(content.keys())) > 0 and updateKey in Property.__dict__.keys():
-            updateKey = list(content.keys())[0]
-            print(updateKey)
-            # updateQ = Property.update(Property.__dict__[updateKey] = content[updateKey]).where(key == value)
-            # updateQ.execute()
-            # updating_property.__dict__[updateKey] = content[updateKey]
-            print(updating_property.__dict__)
-            # updating_property.save()
-            print(updating_property.__dict__)
+    # print(content)
 
-        return json.dumps(updating_property.to_dict())
+    updateKey = list(content.keys())[0]
+    updating_property = Property.get(Property.id == id)
+
+    # print(updating_property._data)
+
+    if len(list(content.keys())) == 0:
+        return Response(status = 303)
+
+    elif updateKey is not None and updateKey in updating_property._data.keys():
+        # print(updateKey)
+
+        updating_property._data[updateKey] = content[updateKey]
+        
+        try:
+            updating_property.save()
+            return json.dumps(updating_property.to_dict())
+
+        except IntegrityError:
+            return Response(status=409)
+       
     else:
         # key does not exist in table status 
-        return Response(status = 409)
+        return Response(status = 404)
 
+@property.route('/property/<id>', methods = ['DELETE'])
+def delete_property(id):
 
+    try:
+        deleteing_property = Property.get(Property.id == id)
+    except DoesNotExist:
+        return Response(status = 404)
+    try:
+        deleteing_property.delete_instance()
+        return Response(status = 200)
+
+    except IntegrityError:
+            return Response(status=409)      
+
+    return Response(status = 404)
 
 
 
