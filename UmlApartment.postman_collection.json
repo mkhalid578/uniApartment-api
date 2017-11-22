@@ -18,7 +18,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Name\": \"farttts\",\n\t\"Password\": \"popoop\",\n\t\"Email\" : \"soFresshAndClean@coolguy.com\",\n\t\"Property\": \"1\"\n}"
+					"raw": "{\n\t\"Name\": \"farts\",\n\t\"Password\": \"popdoop\",\n\t\"Email\" : \"simple@simple.com\",\n\t\"University\": \"U Lowell\",\n\t\"Property\": \"3\"\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/user",
@@ -39,7 +39,7 @@
 			"response": []
 		},
 		{
-			"name": "http://127.0.0.1:5000/property",
+			"name": "create/update Property",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -50,7 +50,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"Available\":true,\n\"Rent\":995, \n\"Beds\":2,\n\"Baths\":2,\n\"Pets\":true,\t\n\"Features\":\"Central Air, Fitness Center, Furnished, Granite Counter Tops, Hardwood Floors, Internet, Laundry in Unit, New Appliances, New/Renovated Bath, New/Renovated Kitchen, Stainless Steel Appliance(s)\",\n\"ContactInfo\":\"Email :coolguy@coolguy.gov, Phone: 606-666-0606, Name : Jonhson\",\n\"Address\":\"315jl15lj125lj 125l125 152l j215lj 125lj 1l 125lj 12\"\n}"
+					"raw": "{\"Available\":true,\n\"Rent\":500, \n\"Beds\":2,\n\"Baths\":1,\n\"Pets\":true,\t\n\"Features\":\"  Internet,  New/Renovated Bath, New/Renovated Kitchevavsa, Stainless Steel Appliance(s)\",\n\"ContactInfo\":\"Email :coolguy@coolguy.gov, Phone: 606-666-0606, Name : Jonhson\",\n\"Address\":\"315jl52l  125lj 1l 125lj 12\",\n\"id\": 2,\n\"ImageUrl\": \"\"\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/property",
@@ -114,8 +114,57 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Pets\": false\n}"
+					"raw": "{\n\t\"Pets\": \"true\"\n}"
 				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/property/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"property",
+						"2"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET all Property",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/property",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"property"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific Property",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
 				"url": {
 					"raw": "http://127.0.0.1:5000/property/Pets=1",
 					"protocol": "http",
@@ -129,6 +178,205 @@
 					"path": [
 						"property",
 						"Pets=1"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Property",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/property/4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"property",
+						"4"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get user by username or email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/username=farts",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"username=farts"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "login User ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Email\" : \"soFreshAndClean@coolguy.com\",\n\t\"Password\" : \"popdoop\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"login"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Password\":\"current pasword\",\n\t\"newPassword\" : \"newpassword\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/6",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"6"
+					]
+				},
+				"description": "for passwords and such."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Password\": \"popdoop\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/7",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"7"
+					]
+				},
+				"description": "delete user "
+			},
+			"response": []
+		},
+		{
+			"name": "get user properties",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/2/property",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"2",
+						"property"
 					]
 				},
 				"description": ""
