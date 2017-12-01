@@ -15,18 +15,18 @@ user = Blueprint('user', __name__)
 def create_user():
     content = request.get_json()
     new_user = User()
-    new_user.Username = content.get("Name")
+    new_user.FirstName = content.get("FirstName")
+    new_user.LastName = content.get("LastName")
     new_user.Password = content.get("Password")
     new_user.University = content.get("University")
     new_user.Email = content.get("Email")
-    new_user.Property = content.get("Property")
 
     try:
         new_user.save()
     except IntegrityError:
         return Response(status=409)
 
-    return json.dumps({'id' : new_user.id})
+    return json.dumps(new_user.to_dict())
 
 
 @user.route('/user', methods=['GET'])

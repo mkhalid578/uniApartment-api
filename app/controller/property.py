@@ -20,20 +20,29 @@ def get_or_create_property():
 
 
     new_property = Property().get_or_create(
-    Available = content.get("Available"),
-    Rent = content.get("Rent"),
-    Beds = content.get("Beds"),
-    Baths = content.get("Baths"),
-    Pets = content.get("Pets"),
-    Features = content.get("Features"),
-    Address = content.get("Address"),
-    imageUrl = content.get("ImageUrl")
-        )[0]
-    if new_property.Interested is not None and str(content.get("id")) not in str(new_property.Interested):
-        interested  ="{} {} {}".format(new_property.Interested , ' ' , str(content.get("id")))
-        print(interested)
-        new_property.Interested = interested
-        new_property.save()
+        Rent = content.get("Rent"),
+        PriceLow = content.get("PriceLow"),
+        PriceHigh = content.get("PriceHigh"),
+        minBed = content.get("minBed"),
+        maxBed = content.get("maxBed"),
+        Rating = content.get("Rating"),
+        imageUrl = content.get("ImageUrl"),
+
+        AptNumber = content.get("AptNumber"),
+        Street = content.get("Street"),
+        City = content.get("City"),
+        State = content.get("State"),
+        Zip = content.get("Zip"),
+        Address = content.get("Address"),
+
+        AppartmentName = content.get("AppartmentName"),
+        Description = content.get("Description"),
+        Features = content.get("Features"),
+        PhoneContact = content.get("PhoneContact"),
+        Availabilty = content.get("Available"),
+        University = content.get("University"),
+        Owner = content.get("OwnerId"))[0]
+
     print(new_property)
     try:
         pass
@@ -42,6 +51,12 @@ def get_or_create_property():
         return Response(status=409)
 
     return json.dumps({'id': new_property.id})
+
+
+
+# for all gets the id of the owner needs passed back only the owner id. 
+
+
 
 @property.route('/property', methods = ['GET'])
 def get_all_property():
@@ -68,7 +83,7 @@ def get_specific_property(key, value):
 
         # this will need a 'where like' statement for the textfields
         return json.dumps(
-                [prop.to_dict() for prop in Property.select().where(Property.__dict__[key].field == int(value))] )
+                [prop.to_dict() for prop in Property.select().where(Property.__dict__[key].field == value)] )
     else:
         # we need a status that says the query is bad because of the key
         return Response(status = 404)

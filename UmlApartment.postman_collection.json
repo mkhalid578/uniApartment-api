@@ -18,23 +18,21 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"Name\": \"farts\",\n\t\"Password\": \"popdoop\",\n\t\"Email\" : \"simple@simple.com\",\n\t\"University\": \"U Lowell\",\n\t\"Property\": \"3\"\n}"
+					"raw": "{\n\t\"Name\": \"tom\",\n\t\"Password\": \"password\",\n\t\"Email\" : \"tom@simple.com\",\n\t\"University\": \"U Lowell\",\n\t\"Property\": \"3\"\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/user",
-					"protocol": "http",
+					"raw": "https://uni-apartment-services.herokuapp.com/user",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"user"
 					]
 				},
-				"description": ""
+				"description": "This is used to create a user. this should be used in registration. A json of the name password email university should be passed. Property will most likely be taken out. This request is successful if 200 response is sent back with the id. the id is the row id in the database. 409 is returned if the user already exists."
 			},
 			"response": []
 		},
@@ -53,20 +51,18 @@
 					"raw": "{\"Available\":true,\n\"Rent\":500, \n\"Beds\":2,\n\"Baths\":1,\n\"Pets\":true,\t\n\"Features\":\"  Internet,  New/Renovated Bath, New/Renovated Kitchevavsa, Stainless Steel Appliance(s)\",\n\"ContactInfo\":\"Email :coolguy@coolguy.gov, Phone: 606-666-0606, Name : Jonhson\",\n\"Address\":\"315jl52l  125lj 1l 125lj 12\",\n\"id\": 2,\n\"ImageUrl\": \"\"\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/property",
-					"protocol": "http",
+					"raw": "https://uni-apartment-services.herokuapp.com/property",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"property"
 					]
 				},
-				"description": ""
+				"description": "this is used to create an appartment in the database. a json of available (optional a default value will be added for this) bool(1 or 0), rent(float or int), Beds(int), Baths(int), Pets bool(0 or 1), Features( string), ContactInfo(string this will propbably be obsolete when owner is implemented), Address(string), id(this will become obsolete when the owner is implemented), and Image(string). 200 is returned if successful. 500 if not."
 			},
 			"response": []
 		},
@@ -85,20 +81,18 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/property",
-					"protocol": "http",
+					"raw": "https://uni-apartment-services.herokuapp.com/property",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"property"
 					]
 				},
-				"description": ""
+				"description": "This gets all properties in the database. send the get with this url and a list of all properties will be sent back in json form. if only 1 property exists you will receive a list 1 element long of a json dictionary."
 			},
 			"response": []
 		},
@@ -117,45 +111,19 @@
 					"raw": "{\n\t\"Pets\": \"true\"\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/property/2",
-					"protocol": "http",
+					"raw": "https://uni-apartment-services.herokuapp.com/property/2",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"property",
 						"2"
 					]
 				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "GET all Property",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://127.0.0.1:5000/property",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"property"
-					]
-				},
-				"description": ""
+				"description": "This is used to update the property. the id of the property must be appended to the url base-url/property/<id>, and the json of the element or elements of what you wish to change. if successful a 200 response will be sent and the full property json will be sent back."
 			},
 			"response": []
 		},
@@ -166,21 +134,19 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://127.0.0.1:5000/property/Pets=1",
-					"protocol": "http",
+					"raw": "https://uni-apartment-services.herokuapp.com/property/Pets=1",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"property",
 						"Pets=1"
 					]
 				},
-				"description": ""
+				"description": "this will get all the properties with the specified values. base-url/property/<key>=<value> the key is the specified field Pets, beds, baths... so on. The value is the value you are looking for. 1 = true. a list of appartment json that fits the given key value is returned."
 			},
 			"response": []
 		},
@@ -205,7 +171,7 @@
 						"4"
 					]
 				},
-				"description": ""
+				"description": "this destorys the property. it will never be able to be used again if this is successful. the id of the property is needed and is appened to the base-url base-url/property/<id> if this is successful 200 is returned."
 			},
 			"response": []
 		},
@@ -216,20 +182,18 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://127.0.0.1:5000/user",
-					"protocol": "http",
+					"raw": "https://uni-apartment-services.herokuapp.com/user",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"user"
 					]
 				},
-				"description": ""
+				"description": "this gets every user in the database. just send a get request with this url and a json list of users will be sent back."
 			},
 			"response": []
 		},
@@ -240,21 +204,19 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://127.0.0.1:5000/user/username=farts",
-					"protocol": "http",
+					"raw": "https://uni-apartment-services.herokuapp.com/user/username=farts",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"user",
 						"username=farts"
 					]
 				},
-				"description": ""
+				"description": "this will get a user that has the specific email or username specified in the request. username or emial needs appened to the base-url then = then the specific value. base-url/user/<username or email>=<value>. 200 response is returned with the json of that username or email. username and email are used because they are unique in this context."
 			},
 			"response": []
 		},
@@ -273,21 +235,19 @@
 					"raw": "{\n\t\"Email\" : \"soFreshAndClean@coolguy.com\",\n\t\"Password\" : \"popdoop\"\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/user/login",
-					"protocol": "http",
+					"raw": "https://uni-apartment-services.herokuapp.com/user/login",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"user",
 						"login"
 					]
 				},
-				"description": ""
+				"description": "this is used for logining in. post request wiht base-url/user/login and in the body a json of <email> and <password> need to be sent. if the user does not exist 404 will be returned if the passwords do not match then 203 response is sent."
 			},
 			"response": []
 		},
@@ -306,21 +266,19 @@
 					"raw": "{\n\t\"Password\":\"current pasword\",\n\t\"newPassword\" : \"newpassword\"\n}"
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/user/6",
-					"protocol": "http",
+					"raw": "https://uni-apartment-services.herokuapp.com/user/6",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"user",
 						"6"
 					]
 				},
-				"description": "for passwords and such."
+				"description": "for passwords. the user id is appened to the base-url, base-url/user/<id> and a json of the password and newpassword. if the user does not exist 404 is sent. if the password is different you are a little teapot which is a 418 response. 200 for success."
 			},
 			"response": []
 		},
@@ -353,7 +311,7 @@
 						"7"
 					]
 				},
-				"description": "delete user "
+				"description": "delete user. this destroys the user from the database they do not exist if this is successful. user id is appened to the base-url/users like: base-url/user/<id>. if successful 200 response is send. 409 if the password does not match."
 			},
 			"response": []
 		},
@@ -364,22 +322,20 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://127.0.0.1:5000/user/2/property",
-					"protocol": "http",
+					"raw": "https://uni-apartment-services.herokuapp.com/user/2/property",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"user",
 						"2",
 						"property"
 					]
 				},
-				"description": ""
+				"description": "this gets all the properties a user is interested in. this will become obsolete once the owner is implemented. but it returns all the properties of a user is interested in. get reuest of base-url/user/<id>/property response is a json list of properties."
 			},
 			"response": []
 		}

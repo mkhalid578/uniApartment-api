@@ -6,7 +6,9 @@ from app import db
 # user db table
 class User(Model):
     # fields in the db table
-    Username = CharField(unique = True)
+    FirstName = CharField()
+    LastName = CharField()
+
     Password = CharField()
     # this should not be null will need fixed
     Email = CharField(unique =True)
