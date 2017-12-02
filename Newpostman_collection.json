@@ -1,0 +1,338 @@
+{
+	"info": {
+		"name": "UmlApartment",
+		"_postman_id": "79ba12a2-36a2-3b93-0bb9-0fe15bf19504",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User/creation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"FirstName\": \"Jacob\",\n\t\"LastName\": \"monkeyfeet\",\n\t\"Password\": \"password\",\n\t\"Email\" : \"jmontpetit__@UML.com\",\n\t\"University\": \"ULowell\"\n}"
+				},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.comuser",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"comuser"
+					]
+				},
+				"description": "This is used to create a user. this should be used in registration. A json of the name password email university should be passed. Property will most likely be taken out. This request is successful if 200 response is sent back with the id. the id is the row id in the database. 409 is returned if the user already exists."
+			},
+			"response": []
+		},
+		{
+			"name": "create/update Property",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Available\":true,\n\"Rent\":500, \n\"PriceLow\":2,\n\"PriceHigh\":1,\n\"minBed\": 1,\n\"maxBed\": 2,\n\"Rating\": 3,\n\"ImageUrl\": \"\",\n\n\"AptNumber\": 69,\n\"Street\": \"No\",\n\"City\": \"london\",\n\"State\": \"arkansas\",\n\"Zip\": \"66666\",\n\"Address\":\"315jl52l  125lj 1l 125lj 12\",\n\"AppartmentName\": \"tom\",\n\"Description\": \"\",\n\"Features\":\"  Internet,  New/Renovated Bath, New/Renovated Kitchevavsa, Stainless Steel Appliance(s)\",\n\"PhoneContact\":\"Phone: 606-666-0606\",\n\"University\": \"ULowell\",\n\"OwnerId\": 2\n}"
+				},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.com/property",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"property"
+					]
+				},
+				"description": "this is used to create an appartment in the database. a json of available (optional a default value will be added for this) bool(1 or 0), rent(float or int), Beds(int), Baths(int), Pets bool(0 or 1), Features( string), ContactInfo(string this will propbably be obsolete when owner is implemented), Address(string), id(this will become obsolete when the owner is implemented), and Image(string). 200 is returned if successful. 500 if not."
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Property",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.com/property",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"property"
+					]
+				},
+				"description": "This gets all properties in the database. send the get with this url and a list of all properties will be sent back in json form. if only 1 property exists you will receive a list 1 element long of a json dictionary."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Property",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Pets\": \"true\"\n}"
+				},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.com/property/2",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"property",
+						"2"
+					]
+				},
+				"description": "This is used to update the property. the id of the property must be appended to the url base-url/property/<id>, and the json of the element or elements of what you wish to change. if successful a 200 response will be sent and the full property json will be sent back."
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific Property",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.com/property/University=U Lowell",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"property",
+						"University=U Lowell"
+					]
+				},
+				"description": "this will get all the properties with the specified values. base-url/property/<key>=<value> the key is the specified field Pets, beds, baths... so on. The value is the value you are looking for. 1 = true. a list of appartment json that fits the given key value is returned."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Property",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.com/property/2",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"property",
+						"2"
+					]
+				},
+				"description": "this destorys the property. it will never be able to be used again if this is successful. the id of the property is needed and is appened to the base-url base-url/property/<id> if this is successful 200 is returned."
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.com/user",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"user"
+					]
+				},
+				"description": "this gets every user in the database. just send a get request with this url and a json list of users will be sent back."
+			},
+			"response": []
+		},
+		{
+			"name": "get user by username or email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.com/user/username=farts",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"user",
+						"username=farts"
+					]
+				},
+				"description": "this will get a user that has the specific email or username specified in the request. username or emial needs appened to the base-url then = then the specific value. base-url/user/<username or email>=<value>. 200 response is returned with the json of that username or email. username and email are used because they are unique in this context."
+			},
+			"response": []
+		},
+		{
+			"name": "login User ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Email\" : \"soFreshAndClean@coolguy.com\",\n\t\"Password\" : \"popdoop\"\n}"
+				},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.com/user/login",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				},
+				"description": "this is used for logining in. post request wiht base-url/user/login and in the body a json of <email> and <password> need to be sent. if the user does not exist 404 will be returned if the passwords do not match then 203 response is sent."
+			},
+			"response": []
+		},
+		{
+			"name": "update user",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Password\":\"current pasword\",\n\t\"newPassword\" : \"newpassword\"\n}"
+				},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.com/user/6",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"user",
+						"6"
+					]
+				},
+				"description": "for passwords. the user id is appened to the base-url, base-url/user/<id> and a json of the password and newpassword. if the user does not exist 404 is sent. if the password is different you are a little teapot which is a 418 response. 200 for success."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Password\": \"popdoop\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/user/7",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"7"
+					]
+				},
+				"description": "delete user. this destroys the user from the database they do not exist if this is successful. user id is appened to the base-url/users like: base-url/user/<id>. if successful 200 response is send. 409 if the password does not match."
+			},
+			"response": []
+		},
+		{
+			"name": "get user properties",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://uni-apartment-services.herokuapp.com/user/2/property",
+					"protocol": "https",
+					"host": [
+						"uni-apartment-services",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"user",
+						"2",
+						"property"
+					]
+				},
+				"description": "this gets all the properties a user is interested in. this will become obsolete once the owner is implemented. but it returns all the properties of a user is interested in. get reuest of base-url/user/<id>/property response is a json list of properties."
+			},
+			"response": []
+		}
+	]
+}

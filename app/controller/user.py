@@ -33,6 +33,15 @@ def create_user():
 def get_all_users():
     return json.dumps([user.to_dict() for user in User.select()])
 
+@user.route('/user/<id>', methods=['GET'])
+def get_by_id(id):
+    try:
+        got_user = User.get(User.id == id)
+        return json.dumps(got_user.to_dict())
+
+    except DoesNotExist:
+        return Response(status = 404)
+
 @user.route('/user/<key>=<value>', methods=['GET'])
 def get_user_by_name_or_email(key, value):
     key = str(key).lower()
@@ -40,9 +49,9 @@ def get_user_by_name_or_email(key, value):
     jsonDict = {}
     got_user = None
 
-    if key == 'email':
+    if key == 'id':
         try:
-            got_user = User.get(User.Email == value)
+            got_user = User.get(User.id == value)
             jsonDict = got_user.to_dict()
             return json.dumps( got_user.to_dict())
 
