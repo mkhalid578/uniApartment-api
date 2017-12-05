@@ -42,7 +42,7 @@ class Property(Model):
     Available = BooleanField()
 
     University = TextField()
-    Owner = ForeignKeyField(User)
+    OwnerId = ForeignKeyField(User)
     # this should also be contact information but for simplicity we will have non of that 
 
     # owner = ForeignKeyField(User, to_field = id, related_name='property')

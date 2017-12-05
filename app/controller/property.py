@@ -41,7 +41,7 @@ def get_or_create_property():
         PhoneContact = content.get("PhoneContact"),
         Available = content.get("Available"),
         University = content.get("University"),
-        Owner = content.get("OwnerId"))[0]
+        OwnerId = content.get("OwnerId"))[0]
 
     print(new_property)
     try:
