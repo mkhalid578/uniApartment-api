@@ -35,11 +35,11 @@ def get_or_create_property():
         Zip = content.get("Zip"),
         Address = content.get("Address"),
 
-        AppartmentName = content.get("AppartmentName"),
+        ApartmentName = content.get("ApartmentName"),
         Description = content.get("Description"),
         Features = content.get("Features"),
         PhoneContact = content.get("PhoneContact"),
-        Availabilty = content.get("Available"),
+        Available = content.get("Available"),
         University = content.get("University"),
         Owner = content.get("OwnerId"))[0]
 

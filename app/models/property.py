@@ -35,11 +35,11 @@ class Property(Model):
     Zip = CharField()
     Address = TextField()
 
-    AppartmentName = TextField()
+    ApartmentName = TextField()
     Description = TextField()
     Features = TextField()
     PhoneContact = TextField()
-    Availabilty = BooleanField()
+    Available = BooleanField()
 
     University = TextField()
     Owner = ForeignKeyField(User)
