@@ -109,7 +109,7 @@ def login_user():
 
             if got_user.Password == content['Password']:
                 # this can be edited to what ever the front end needs
-                return json.dumps({'id': got_user.id})
+                return json.dumps(got_user.to_dict())
             else:
                 return Response(status = 203)
         except DoesNotExist:
