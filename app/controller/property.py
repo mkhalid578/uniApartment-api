@@ -26,7 +26,7 @@ def get_or_create_property():
         minBed = content.get("minBed"),
         maxBed = content.get("maxBed"),
         Rating = content.get("Rating"),
-        imageUrl = content.get("ImageUrl"),
+        imageUrl = content.get("imageUrl"),
 
         AptNumber = content.get("AptNumber"),
         Street = content.get("Street"),
